@@ -7,19 +7,26 @@
  */
 require_once "../require.php";
 
-
-
 class exercice2 extends Controller {
 
-    protected function buildResultRecursive($word, $idx) {
-        
+    protected function buildResultRecursive($idx, $word, $input) {
+        $len = strlen($word);
+        $back  = array();
+
+        if ($idx == $len) {
+            return $back;
+        } else
+            array_merge($back, $this->buildResultRecursive($idx +1, $word, $back));
+        return $back;
     }
 
     protected function buildResult($word = "") {
-        $back = false;
+        $back = array();
 
-        if ($word != '')
-            $back = $this->buildResultRecursive($word, 0);
+        if ($word != '') {
+            $back =  array($word);
+            $back = $this->buildResultRecursive(0, $word, $back);
+        }
 
         return $back;
     }
@@ -28,6 +35,10 @@ class exercice2 extends Controller {
 
         $result = $this->buildResult(HttpRequest::getPost('word'));
 
+        if (HttpRequest::getPost('word') !== false) {
+            var_dump($result);
+        }
+var_dump(HttpRequest::getPostTab());
         self::render(array('result' => $result));
     }
 

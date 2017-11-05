@@ -1,11 +1,16 @@
 <a href="../">Back</a>
 
 <h1> Resultat </h1>
+<ul>
+<?php foreach ($args['result'] as $item) { ?>
+    <li><?php echo $item ?></li>
+<?php } ?>
+</ul>
 
-
-<form action="" method="post" >
+<h1> Formulaire </h1>
+<form action="exercice2.php" method="post" >
     <ul>
-        <li><label for="word"></label><input type="text" name="word" id="word" value="<?=HttpRequest::getPost('word')?>"/></li>
-        <li><input type="button" value="Trouver les solutions"/></li>
+        <li><label for="word"></label><input type="text" name="word" id="word" value="<?php echo HttpRequest::getPost('word')?>"/></li>
+        <li><input type="submit" value="Trouver les solutions"/></li>
     </ul>
 </form>
