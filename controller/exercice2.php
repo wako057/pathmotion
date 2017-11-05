@@ -9,23 +9,36 @@ require_once "../require.php";
 
 class exercice2 extends Controller {
 
-    protected function buildResultRecursive($idx, $word, $input) {
-        $len = strlen($word);
-        $back  = array();
 
-        if ($idx == $len) {
-            return $back;
-        } else
-            array_merge($back, $this->buildResultRecursive($idx +1, $word, $back));
+    protected function swapLetter($word, $from, $to) {
+        $tmp  = $word{$from};
+        $word{$from} = $word{$to};
+        $word{$to} = $tmp;
+
+        return $word;
+    }
+
+    protected function buildResultRecursive($word, $idx, $max, &$back) {
+
+        if ($idx == $max) {
+            array_push($back, $word);
+        } else {
+            for ($cpt = $idx; $cpt <= $max; $cpt++) {
+                $newWord = $this->swapLetter($word, $idx, $cpt);
+                $this->buildResultRecursive($newWord, $idx +1 , $max, $back);
+            }
+        }
         return $back;
     }
 
     protected function buildResult($word = "") {
         $back = array();
 
-        if ($word != '') {
-            $back =  array($word);
-            $back = $this->buildResultRecursive(0, $word, $back);
+        if ($word != '' && strlen($word) > 1) {
+            $len  = strlen($word) - 1;
+
+            $back =  array();
+            $this->buildResultRecursive($word, 0, $len, $back);
         }
 
         return $back;
@@ -35,10 +48,6 @@ class exercice2 extends Controller {
 
         $result = $this->buildResult(HttpRequest::getPost('word'));
 
-        if (HttpRequest::getPost('word') !== false) {
-            var_dump($result);
-        }
-var_dump(HttpRequest::getPostTab());
         self::render(array('result' => $result));
     }
 
