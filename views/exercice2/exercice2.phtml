@@ -2,18 +2,10 @@
 
 <h1> Resultat </h1>
 
-<label>Le meilleurs profit possible est: <?=$args['bestprofit'] ?></label>
 
-<table>
-    <tr>
-        <td>Nb Minute</td>
-        <td>Prix</td>
-    </tr>
-    <?php
-    foreach ($args['price'] as $minute => $item) { ?>
-    <tr>
-        <td><?php echo $minute?></td>
-        <td><?php echo $item?></td>
-    </tr>
-    <?php } ?>
-</table>
+<form action="" method="post" >
+    <ul>
+        <li><label for="word"></label><input type="text" name="word" id="word" value="<?=HttpRequest::getPost('word')?>"/></li>
+        <li><input type="button" value="Trouver les solutions"/></li>
+    </ul>
+</form>

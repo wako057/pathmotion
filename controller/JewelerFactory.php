@@ -27,7 +27,7 @@ class JewelerFactory extends Factory{
             $price = mt_rand() % (JewelerFactory::MaxPriceSImulation - JewelerFactory::MinPriceSimulation) + JewelerFactory::MinPriceSimulation;
             $back[$cpt] = $price;
         }
-        
+
         return $back;
     }
 }

@@ -9,5 +9,5 @@
 
 abstract class Controller {
 
-    abstract static public function render();
+    abstract static public function render($args = array());
 }

@@ -11,4 +11,5 @@ require_once "controller/JewelerFactory.php";
 require_once "controller/HttpRequest.php";
 
 require_once "controller/Controller.php";
-require_once "controller/exercice1.php";
+//require_once "controller/exercice1.php";
+//require_once "controller/exercice2.php";

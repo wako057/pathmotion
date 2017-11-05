@@ -5,19 +5,35 @@
  * Date: 05/11/2017
  * Time: 14:44
  */
-require "../require.php";
+require_once "../require.php";
 
 class exercice1 extends Controller {
 
-    public function index() {
-        $price = JewelerFactory::createYesterdayPriceArray();
+    public function findBestProfit($diamondGrammePrices) {
+        $back = 0;
 
-        var_dump($price);
+        $nbElement = count($diamondGrammePrices);
+        for ($cpt = 0; $cpt < $nbElement; $cpt++) {
+            for ($cpt2 = $cpt; $cpt2 < $nbElement; $cpt2++) {
+                if ($diamondGrammePrices[$cpt2] - $diamondGrammePrices[$cpt] > $back) {
+                    $back = $diamondGrammePrices[$cpt2] - $diamondGrammePrices[$cpt];
+                }
 
-        self::render();
+            }
+        }
+
+        return $back;
     }
 
-    public static function render()
+    public function index() {
+        $diamondGrammePrices = JewelerFactory::createYesterdayPriceArray();
+
+        $bestprofit = $this->findBestProfit($diamondGrammePrices);
+
+        self::render(array('bestprofit' => $bestprofit, 'price' => $diamondGrammePrices));
+    }
+
+    public static function render($args = array())
     {
         require '../views/header.phtml';
         require '../views/exercice1/exercice1.phtml';
