@@ -6,6 +6,6 @@
  * Time: 14:20
  */
 
-class Factory {
-    abstract function createYesterdayPriceArray();
+abstract class Factory {
+    abstract static public function createYesterdayPriceArray();
 }
